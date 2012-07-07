@@ -1,0 +1,127 @@
+#scheduleFrame {
+	height:90%;
+	width:300px;
+}
+#mySchedule {
+	float:left;
+	margin: 10px auto;
+	padding: 0px;
+	height:80%;
+	width:100%;
+	z-index:3;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.block {
+	width:150px;
+	height:130px;
+	background-color:#CCC;
+	margin:5px;
+	line-height:40px;
+	font-size:13px;
+	text-align:center;
+	cursor:move;
+	z-index:3;
+}
+.block a {
+	font-size: 24px;
+	color:#fff;
+}
+
+
+#buttonFrame {
+	position:absolute;
+	left:20px;
+	top:0;
+	height:320px;
+	width:30px;
+	padding:0;
+	z-index:1001;
+}
+.button {
+	float:left;
+	width:80px;
+	height:30px;
+	text-align: center;
+	line-height:30px;
+	margin-bottom:60px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	background-color:#67D838;
+	color:#fff;
+	cursor:pointer;
+	-moz-transform-origin:right bottom;
+	-moz-transform:rotate(-90deg);
+	-webkit-transform-origin:right bottom;
+	-webkit-transform:rotate(-90deg);
+	-o-transform-origin:right bottom;
+	-o-transform:rotate(-90deg);
+	-ms-transform-origin:right bottom;
+	-ms-transform:rotate(-90deg);
+	transform-origin:right bottom;
+	transform:rotate(-90deg);
+}
+.button:hover {
+	background-color:#E3FAE2;
+	color:#67D838;
+}
+
+ul#mySchedule li.spotinfo
+{
+	height: 130px;
+	width: 85%;
+	margin: 0px 0px 5px 10px;
+	padding: 10px;
+	margin-bottom: 8px;
+	background: #67D838;  
+	color: white;
+	text-align: center;
+	border-radius: 5px;
+	line-height: 1.6em;
+
+}
+
+ul#mySchedule li.spotinfo img
+{
+	border-radius: 5px;
+	height: 80px;
+	width: 80px;
+
+}
+
+ul#mySchedule li.trans{
+	height: 40px;
+	width: 85%;
+	padding: 10px;
+	margin: 0px 0px 5px 10px;
+	background: white; 
+	color: black;
+	text-align: center;
+	font-size: 10px;
+	border-radius: 3px;
+	line-height: 1.6em;
+	border: 2px solid white;
+	cursor: pointer;
+}
+ul#mySchedule li.travel_time_content {
+	position:relative;
+}
+
+#right{
+	position:absolute;
+	left:50px;
+	width: 130px;
+}
+#left{
+	position:absolute;
+	left: 0px;
+}
+
+.traffic_right{
+	position:absolute;
+	left:70px;
+}
+.traffic_left{
+	position:absolute;
+	left: 0px;
+}

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: MyString
+  schedule_name: MyString
+  content: MyText
+
+two:
+  user: MyString
+  schedule_name: MyString
+  content: MyText

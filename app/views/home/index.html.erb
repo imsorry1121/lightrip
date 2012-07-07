@@ -1,0 +1,232 @@
+<%= javascript_include_tag "google_direction_api.js" %>
+<%= javascript_include_tag "map-identify.js" %>
+<%= javascript_include_tag "import_map.js" %>
+<%= javascript_include_tag "change_trans.js" %>
+<%= javascript_include_tag "google_direction_api.js" %>
+<%= javascript_include_tag "save.js" %>
+<%= javascript_include_tag "openschedule.js" %>
+<%= javascript_include_tag "new.js" %>
+<%= javascript_include_tag "postSchedule.js" %>
+<%= javascript_include_tag "cookie.js" %>
+<%= javascript_include_tag "shareSchedule.js" %>
+
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
+<div id="main">
+
+  <ul id="buttonFrame" style="display:none;">
+    <li id="b3" class="button">主要選單</li>
+    
+    <li id="b2" class="button">我的行程</li>
+    <li id="b1" class="button"><%= link_to "Log out", logout_path %></li>
+  </ul>
+<div class="menu" id="droppable" style="display:none;"><h1>刪除</h1></div>
+  <div id="menu" class="menu">
+    <h2>LighTrip! 來去旅遊吧!</h2>
+    <div class="map">
+
+
+<div id="container">
+
+        <!-- 景點地圖 start -->
+        <div id="map_area">
+            <div class="maps">
+            <div class="tw_map"><img src="http://www.im.ntu.edu.tw/~b98006/taiwan_map.gif" width="189" height="343" usemap="#Map01Map" name="map" border="0" alt="台灣地圖導覽"></div>
+            </div>
+
+
+            <!-- 景點計數:start -->
+            <div class="scenic">
+              <ul class="city">
+              <li>縣市名：<span id="CityName"></span>&nbsp;</li>
+              </ul>
+              <div id="chosenSpots"></div>
+            </div>
+            
+            <!-- 景點計數:end -->
+  </div>
+          <!-- 景點地圖 end -->
+
+<map name="Map01Map" id="Map01Map"> 
+<area id="taipei" shape="poly" coords="139,33,146,37,150,23,143,14,134,22,139,33" onclick="spanidrestore('台北市');" onmouseover="spanid('台北市','187','4259');" alt="台北市" title="台北市">
+<area shape="poly" coords="151,21,160,28,167,20,159,14,151,19" onclick="spanidrestore('基隆市');" onmouseover="spanid('基隆市','30','291');" alt="基隆市" title="基隆市">
+<area shape="poly" coords="161,30,151,24,147,37,138,35,134,23,138,15,145,13,149,20,157,13,145,4,134,10,122,22,129,33,123,43,127,49,138,67,149,57,169,40,178,31,175,22,168,21" onclick="spanidrestore('新北市');" onmouseover="spanid('新北市','257','3395');" alt="新北市" title="新北市">
+<area shape="poly" coords="125,33,119,42,137,69,128,77,112,53,91,40,104,24,118,20" onclick="spanidrestore('桃園縣');" onmouseover="spanid('桃園縣','64','1113');" alt="桃園縣" title="桃園縣">
+<area shape="poly" coords="90,39,113,53,128,78,118,88,102,81,98,72,87,61,100,58,88,48,93,40" onclick="spanidrestore('新竹縣');" onmouseover="spanid('新竹縣','50','834');" alt="新竹縣" title="新竹縣">
+<area shape="poly" coords="84,60,96,57,88,48,84,58" onclick="spanidrestore('新竹市');" onmouseover="spanid('新竹市','23','352');" alt="新竹市" title="新竹市">
+<area shape="poly" coords="95,70,99,81,119,89,100,100,75,103,58,86,81,60"  onclick="spanidrestore('苗栗縣');" onmouseover="spanid('苗栗縣','51','866');" alt="苗栗縣" title="苗栗縣">
+<area title="台中市" alt="台中市" onmouseover="spanid('台中市','70','1034');" onclick="spanidrestore('台中市');"  coords="76,104,102,101,121,91,132,94,128,108,80,121,73,133,59,122,53,117,46,110,59,88,76,104" shape="poly">
+<area shape="poly" coords="60,126,73,135,80,122,127,110,110,169,100,188,77,184,73,173,59,156,59,146"  onclick="spanidrestore('南投縣');" onmouseover="spanid('南投縣','162','1629');" alt="南投縣" title="南投縣">
+<area shape="poly" coords="44,112,59,127,57,152,24,148" onclick="spanidrestore('彰化縣');" onmouseover="spanid('彰化縣','34','435');" alt="彰化縣" title="彰化縣">
+<area shape="poly" coords="11,178,32,171,74,179,56,154,23,149,15,162,12,181" onclick="spanidrestore('雲林縣');" onmouseover="spanid('雲林縣','107','459');" alt="雲林縣" title="雲林縣">
+<area shape="poly" coords="31,172,70,179,82,188,61,212,49,205,48,182,38,180,34,185,40,191,21,202,12,196,13,179" onclick="spanidrestore('嘉義縣');" onmouseover="spanid('嘉義縣','59','359');" alt="嘉義縣" title="嘉義縣">
+<area shape="poly" coords="34,185,40,182,46,183,47,195,40,189" onclick="spanidrestore('嘉義市');" onmouseover="spanid('嘉義市','7','17');" alt="嘉義市" title="嘉義市">
+<area title="台南市" alt="台南市" onmouseover="spanid('台南市','98','833');" onclick="spanidrestore('台南市');" coords="12,198,21,203,42,192,48,196,49,206,61,212,39,239,24,241,16,243,15,232,6,226" shape="poly">
+<area title="高雄市" alt="高雄市" onmouseover="spanid('高雄市','138','984');" onclick="spanidrestore('高雄市');"  coords="17,243,40,240,85,186,101,189,96,200,77,247,46,248,43,288,28,272,24,257" shape="poly">
+<area shape="poly" coords="46,250,75,248,82,254,78,261,68,269,72,302,79,306,84,306,78,339,64,337,61,308,39,287" onmouseover="spanid('屏東縣','113','732');" alt="屏東縣" title="屏東縣" onclick="spanidrestore('屏東縣');">
+<area shape="poly" coords="78,245,86,253,72,271,75,301,83,305,100,264,131,220,138,188,132,189,119,221,96,203" onclick="spanidrestore('台東縣');" onmouseover="spanid('台東縣','141','912');" alt="台東縣" title="台東縣">
+<area shape="poly" coords="161,102,132,94,112,164,96,202,117,219,136,186"  onclick="spanidrestore('花蓮縣');" onmouseover="spanid('花蓮縣','167','1320');" alt="花蓮縣" title="花蓮縣">
+<area shape="poly" coords="180,32,141,66,120,89,161,100,172,76,170,55" onclick="spanidrestore('宜蘭縣');" onmouseover="spanid('宜蘭縣','108','1433');" alt="宜蘭縣" title="宜蘭縣"></map>
+
+</div><!-- container:end -->
+       <div style="position:absolute; top:0; left:0; width: 241px;"><h1>Step 1 選擇旅遊區塊</h1></div>
+    </div>
+
+    <div class="guider">
+        
+        <h1>Optional: FB login</h1>
+        <% if @access_token %>
+        <div style="position:absolute; left:85px; top:45px;">
+          <img src="https://graph.facebook.com/me/picture?access_token=<%= @access_token %>" />
+        </div>
+        <div style="position:absolute; left:145px; top:60px;">
+          <%= @me['name'] %>
+          <p id='userid' hidden= 'true'><%= @me['id'] %></p>
+          </div>
+          <% else %>
+          <div style="position:absolute; left:20px; top:30px;">
+          <p><div id = 'cookie_or_not'><%= link_to "Click me to login!", login_path %></div></br>當然你也可以選擇忽略該步驟！</p>
+      
+        </div>
+        <% end %>
+
+    </div>
+
+    <form accept-charset="UTF-8" action="/" class="new_attr" id="new_attr" method="post">
+      <div class="attri">
+         <h1>Step 2 加權你的旅遊屬性</h1>
+         <div id="eq">
+          <span id="amount1" val='50'>50</span>
+          <span id="amount2" val='50'>50</span>
+          <span id="amount3" val='50'>50</span>
+          <span id="amount4" val='50'>50</span>
+          <span id="amount5" val='50'>50</span>
+        </div>
+        <div>找美食 | 找遊樂 | 找風景 | 想優閒 | 找便宜</div>
+      </div>
+      <div class="active"><h1>Submit</h1></div>
+      <div class="skip" onclick = "changetomyschedule()"><h1>Skip</h1></div>
+    </form>
+  </div> <!-- end of .menu -->
+
+
+  <div id="scheduleFrame" class="menu" style="display:none;">
+    <h2 id="schedule_name">我的行程</h2>
+    <div id='sid' style='display:none;'></div>
+    <!--<div id="schedule_name">幫行程取個名字吧(click)</div> --> 
+    <ul id='mySchedule' class='connectedSortable'>
+      </ul>
+
+    <div style="position:absolute; right:5px; left:5px; bottom:20px; height:30px; text-align:center;">
+      <hr>
+
+      <input type="button" class="clickme" value="Post" onclick="postSchedule()"/>
+
+      <input type="button" class="clickme" value="New" onclick="clearschedule()"/>
+      <input type="button" class="clickme" value="Open" onclick="openschedule()"/>
+      <input id="save_button" class="clickme" type="button" value="Save" onclick="save()"/>
+      <input type="button" class="clickme" value="Save as" onclick="save_new()"/>
+</div>
+
+  </div> <!-- End of #scheduleFrame -->
+
+</div><!-- End of #main -->
+<div id="myMap"></div><!-- End of #myMap -->
+
+
+<div>
+<script type="text/javascript">
+  setCookie();
+  var result = loadfromCookie();
+  var value = $('#mySchedule').html(result);    
+       //ajax >> show the person initiate the schedule and the schedule name
+
+    //accept the sharing or not? (KEN)
+
+    //accept >> fb login
+        //ajax >> rewrite user & schedule
+        //open share id
+        //set share id
+        
+
+    //not accept
+        //ajax >> open share id
+        // do not set sid!
+
+
+
+ 
+
+
+  <% if @reload == true %>
+       var s= '<%= @schedulereload%>';
+       var s1 = s.replace(/asdfdsa/g, "\"")
+       console.log("s1",s1);
+       reload(s1);  
+      openschedule_share(s1);
+  <% end %>
+
+
+  var pos = new google.maps.LatLng(23.996733, 120.212465);
+  var myOptions = {
+    zoom: 8,
+    center: pos,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById("myMap"), myOptions);
+  <% @spots.each do |spot|%>
+  var spotName = '<%= spot.name %>';
+  var text = '<%= spot.info %>';
+  var address = '<%= spot.address %>';
+  var lat1 = <%= spot.lat %>;
+  var log1 = <%= spot.lon %>;
+  var id = <%= spot.id %>;
+  var min = <%= spot.MinTime %>;
+  var max = <%= spot.MaxTime %>;
+  <% string_path = '/img/' + spot.id.to_s %> 
+  var image =  '<%= string_path%>';
+  console.log(image);
+  var pos = new google.maps.LatLng(lat1, log1);
+  var i = 0;
+  var marker = new google.maps.Marker({
+      position: pos,
+      animation: google.maps.Animation.DROP,
+      title: spotName});
+  marker.setMap(map);
+  var counter= 0;
+  //changeMarker();
+  //function changeMarker(){
+  var spotIn = 0;//解決產生schedule與marker先後順序問題
+  while (($("li.block a").size()>counter)&&(spotIn!=1)){
+    var scheduleName = $("li.block a").eq(counter).html();
+    if (spotName == scheduleName){
+        marker.setIcon("http://maps.google.com/mapfiles/markerA.png");
+        spotIn = 1;
+    }
+    counter++;
+  }  
+//}
+  //console.log(spotName, lat1, log1, text, address);
+  information(id, spotName, lat1, log1, text, address, spotIn, image, min, max);
+
+  <% end %>
+  //addSchedule();
+  if ($('#infoWindow ul li a').html() != null)
+    {addSchedule();}
+  //init();
+
+$("#schedule_name").click(function(){
+  $(this).parent(["#scheduleFrame"]).prepend("<h2><input class='input_travel_time' align='center 'value='請輸入你的行程名稱' size='35'></h2>");
+  $(this).css("display","none");
+   $(".input_travel_time").keypress(function(e){
+      if(e.keyCode == 13){
+        $("#schedule_name").html($(this).val());
+        $("#schedule_name").css("display","block");
+        $(this).blur();
+       // $(this).after('<h2 id="schedule_name" style="color:#fff;">' + $(this).val() + '</h2>');
+        $(this).remove();
+      }
+    }); 
+})
+</script>
+</div>

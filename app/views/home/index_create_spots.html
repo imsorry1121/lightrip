@@ -1,0 +1,88 @@
+<%= javascript_include_tag "google_direction_api.js" %>
+<%= javascript_include_tag "import_map.js" %>
+<%= javascript_include_tag "change_trans.js" %>
+<%= javascript_include_tag "jquery.tinyMap-2.0.1.js" %>
+<%= javascript_include_tag "jquery.tinyMap-2.0.1.min.js" %>
+<%= javascript_include_tag "create_spots.js" %>
+<!--<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
+<div id="main">
+  <!--<div class="firstpage"></div>-->
+  <div class="menu" id="insert-spots">
+<h1>新增私房景點</h1>
+<div id="inputForm">
+  <div id="instructions">Enter a query to forward geocode, or click on the map to reverse geocode.</div>
+  <div>
+    <span style="font-weight: bold">Spot: </span>
+    <input type="text" size="20" id="query"/>
+    <input type="button" value="Get" onclick="submitQuery()"/>
+  </div>
+  <div id="options">
+    <span style="font-weight: bold">Bias this viewport:</span>
+    <input type="checkbox" id="biasViewport"/>
+    <span style="font-weight: bold">Country bias:</span>
+    <input type="text" size="2" id="country"/>
+    <span style="font-weight: bold">Language:</span>
+    <input type="text" size="2" id="language"/>
+  </div>
+</div>
+<div id="responseInfo">
+  <div id="responseStatus">
+    <div>
+      <span style="font-weight: bold">Geocoder response: </span>
+      <span id="statusValue"></span> (<span id="statusDescription"></span>)
+    </div>
+  </div>
+  <div id="responseCount">
+    <span style="font-weight: bold;">Matches returned: </span>
+    <span id="matchCount"></span>
+  </div>
+</div>
+<div id="mapcontainer">
+  <div id="boundsLegend">Bounds</div>
+  <div id="viewportLegend">Viewport</div>
+</div>
+<div id="matches"></div>
+  </div> <!-- end of .menu -->
+
+  <div id="scheduleFrame" style="display:none;">
+    <h2 style="color:#fff;">LighTrip</h2>
+    
+    <div id="traffic_info_temp">a</div>
+    <!--add for memorizing the traffic info  style="display:none;"-->
+    <div id="traffic_info_temp2">1</div>
+
+    <div style="position:absolute; left:-70px; top:0px; width:30px;">
+      <ul id="buttonFrame">
+        <li class="button">Open</li>
+        <li class="button">Save</li>
+        <li class="button">Share</li>
+        <li id="home" class="button">Menu</li>
+      </ul>
+    </div>
+    
+    <div style="position:absolute; left:20px; top:40px; height:400px;">
+    <ul id='mySchedule' class='connectedSortable'>
+      </ul>
+    </div>
+
+    <div style="position:absolute; right:5px; left:5px; bottom:20px; height:60px;">
+      <hr>
+      <label for="search">search</label>
+      <input type="text" name="search" id="search" />
+    </div>
+  </div> <!-- End of #scheduleFrame -->
+
+  <div id="myMap">
+  </div><!-- End of #myMap -->
+
+</div><!-- End of #main -->
+
+<div>
+<script type="text/javascript">
+  init();
+</script>
+</div>
+
+
+
+

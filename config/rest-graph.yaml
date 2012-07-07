@@ -1,0 +1,9 @@
+development:
+  app_id: '404169532959396'
+  secret: '9d33a37fc6d1848e84675c11f7a05eb2'
+  callback_host: 'localhost:3000'
+
+production:
+  app_id: '178908542238211'
+  secret: '6e36841de8b3ba2b609f87735641cebe'
+  callback_host: 'lightrip.herokuapp.com/'

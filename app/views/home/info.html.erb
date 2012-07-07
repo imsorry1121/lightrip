@@ -1,0 +1,35 @@
+  <%= stylesheet_link_tag "default" %>
+  <%= stylesheet_link_tag "nivo-slider" %>
+  <%= stylesheet_link_tag "info-style" %>
+
+  <%= javascript_include_tag "jquery.nivo.slider.js" %>
+
+	<div style="width: 60%;	margin: 30px auto 0px auto;"><img src="assets/litrip-logo.png" width="100%" height="auto"></div>
+    <div id="wrapper">
+      <div class="slider-wrapper theme-default">
+          <div id="slider" class="nivoSlider">
+                <img src="assets/toystory.jpg" data-thumb="assets/toystory.jpg" alt=""title="Wisdomly random your trip!" />
+                <img src="assets/up.jpg" data-thumb="assets/up.jpg" alt="" title="One Click, one customized schedule!" />
+                <img src="assets/post.jpg" data-thumb="assets/post.jpg" alt="" title="Share the schedule to the facebook" data-transition="slideInLeft" />
+                <img src="assets/nemo.jpg" data-thumb="assets/nemo.jpg" alt="" title="Easily drag, easily play" title="#htmlcaption" />
+            </div>
+            <div id="htmlcaption" class="nivo-html-caption">
+                <strong>Simplify</strong> your trip. <strong>Light up</strong>your life! 
+            </div>
+        </div>
+
+    </div>
+    <div style="width: 60%; margin: -20px auto 0px auto;">
+    <!--
+        <img src="assets/fb-login.png" width="50%" height="auto" onMouseOver="this.src='assets/fb-login-hover.png';"  onMouseOut="this.src='assets/fb-login.png';" onMouseDown="this.src='assets/fb-login.png';" onMouseUp="this.src='assets/fb-login-hover.png';">
+
+        <img src="assets/quick-start.png" width="50%" height="auto" onMouseOver="this.src='assets/quick-start-hover.png';"  onMouseOut="this.src='assets/quick-start.png';" onMouseDown="this.src='assets/quick-start.png';" onMouseUp="this.src='assets/quick-start-hover.png';">
+    -->
+        <%= link_to image_tag("fb-login.png", :mouseover => "fb-login-hover.png", :width => "50%", :height => "auto"), login_path %><%= link_to image_tag("quick-start.png", :mouseover => "quick-start-hover.png", :width => "50%", :height => "auto"), home_path %>
+    </div>
+
+    <script type="text/javascript">
+    $(window).load(function() {
+        $('#slider').nivoSlider();
+    });
+    </script>

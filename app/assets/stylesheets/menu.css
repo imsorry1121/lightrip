@@ -1,0 +1,53 @@
+#eq span {
+	height:95px; float:left; margin:0px 20px 0px 20px;
+}
+#map_area {
+	position: absolute;
+	left:30px;
+	top:40px;
+	width:260px;
+}
+.scenic {
+	position: absolute;
+	left:100px;
+	top:230px;
+}
+#menu {
+	left:27%;
+	top:10%;
+	width:610px;
+	height:500px;
+}
+#mapFrame {
+	float:right;
+	width:100%;
+	height:50px;
+}
+#myMap {
+	float:right;
+	background-color:#dedede;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index:1;
+}
+
+#map {
+	float:right;
+	background-color:#000;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index:1;
+}
+
+#chosenSpots{
+	font-size:36px;
+	line-height:30px;
+	text-align:right;
+
+}

@@ -1,0 +1,29 @@
+.infoWindow {
+	font-family:"微軟正黑體", "Cabri";
+	color:#67D838;
+	text-align:center;
+}
+
+.infoWindow h1 img {
+	width:80%;
+	height:auto;
+}
+
+.infoWindow div.clickme {
+	margin: 0px 0px 0px 50%;
+}
+
+.infoWindow a {
+	text-decoration:none;
+	color:#67D838;
+	font-size:18px;
+}
+#infoWindow{
+	background-color:#CCC;
+	font-size:13px;
+	text-align:center;
+	list-style-type: none;
+	background-color: #fff;
+	font-color:#67D838;
+}
+
