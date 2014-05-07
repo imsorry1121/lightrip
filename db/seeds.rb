@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+=begin
+spots = Spot.create[
+	{name: '美麗華'}, 
+	{opentime: '9:00'}, 
+	{lat: '25.082837'}, 
+	{lon: '121.557293'}, {info: '擁有超大型摩天輪，絕佳的約會聖地'}, {picture: ''}]
+
+=end
