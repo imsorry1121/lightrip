@@ -436,8 +436,12 @@ function lightbox(content) {
 						}
 						$('ul#mySchedule').append('<li class="block spotinfo" spotid="' + data[i]['id'] + '" name="' + data[i]['name'] + '" zoom="' + data[i]['zoom'] + '" lat="' + data[i]['lat'] + '" lon="' + data[i]['lon'] + '" address="' + data[i]['address'] + '" spotin="' + data[i]['attr1'] + '" info="' + data[i]['info']+ '" ><a href=javascript:lightbox("' + data[i]['name'] + '")>' + data[i]['name'] + '</a><br/></li>');
 						if( i != (data.length - 1)){
-							var origin1 = data[i]['address'];
-							var destinationA = data[(i+1)]['address'];
+							var origin1 = new google.maps.LatLng(data[i]['lat'], data[i]['lon']);
+							var destinationA = new google.maps.LatLng(data[i+1]['lat'], data[i+1]['lon']);
+							console.log(origin1);
+							console.log(destinationA);
+							// var origin1 = data[i]['address'];
+							// var destinationA = data[(i+1)]['address'];
 							var traffic_id = "";
 							traffic_id = "traffic_" + origin1;
 							traffic_id += "_";

@@ -21,7 +21,8 @@ ActiveRecord::Schema.define(:version => 20120606195833) do
     t.datetime "updated_at",    :null => false
     t.text     "share_uid"
   end
-
+# address is now produced by the google.maps
+# city is now from 1 to 3, represent taipei, taichung, kauohsiung
   create_table "spots", :force => true do |t|
     t.string   "name"
     t.string   "lat"
