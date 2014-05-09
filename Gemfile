@@ -18,7 +18,7 @@ end
 group :production do
   gem 'thin'
   gem 'pg'
-  gem 'therubyracer', '~>0.12.1'
+  gem 'therubyracer'
 end
 
 
