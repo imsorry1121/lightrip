@@ -108,7 +108,6 @@
           outputDiv.innerHTML = '';
          
           deleteOverlays();
-
           for (var i = 0; i < origins.length; i++) {
             var results = response.rows[i].elements;
             //addMarker(origins[i], false);     //可以當作按下交通資訊時的事件

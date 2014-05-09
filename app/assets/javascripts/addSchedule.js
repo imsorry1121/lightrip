@@ -31,13 +31,13 @@ function addSchedule(){
 	    $('#mySchedule').append('<li class="block spotinfo" spotid="'+newSpotID+'" name="'+newSpotName+'" zoom="1.0" lat="'+newSpotLat+'" lon="'+newSpotLon+'" address="'+newSpotAddress+'"spotin = "1" info="'+newSpotText+'"><a href="javascript:lightbox(\''+newSpotName+'\')">'+newSpotName+'</a><img src="'+newSpotImg+'"height="60%" width="90%"><div class="travel_time_space"><div class="travel_time_content">'+newSpotMin+'~'+newSpotMax+'hr</div></div></li>')
 		if(size > 0){
 		var origin_before = $('#mySchedule > li').last().prev().attr('address');
-		//console.log("origin_before = ");
-		//console.log(origin_before);
+		// console.log("origin_before = ");
+		// console.log(origin_before);
 
 		var destination_before = $('#mySchedule > li').last().attr("address");
 		//console.log($('#mySchedule > li').last().next());
-		//console.log("destination_before = ");
-		//console.log(destination_before);
+		// console.log("destination_before = ");
+		// console.log(destination_before);
 
 		var traffic_id_before = "";
 		traffic_id_before = "traffic_" + origin_before;

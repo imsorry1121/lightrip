@@ -12,6 +12,8 @@
 <%= javascript_include_tag "setCookie.js" %>
 <%= javascript_include_tag "warning.js" %>
 <%= javascript_include_tag "changetomyschedule.js" %>
+<%= javascript_include_tag "info.js" %>
+<%= javascript_include_tag "addSchedule.js" %>
 
 <!--<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
 <div id="main">
@@ -179,7 +181,8 @@
   <% @spots.each do |spot|%>
   var spotName = '<%= spot.name %>';
   var text = '<%= spot.info %>';
-  var address = '<%= spot.address %>';
+
+
   var lat1 = <%= spot.lat %>;
   var log1 = <%= spot.lon %>;
   var id = <%= spot.id %>;
@@ -190,6 +193,7 @@
   console.log(image);
   var pos = new google.maps.LatLng(lat1, log1);
   var i = 0;
+  var address = pos; //這裡沒有用到database的address
   var marker = new google.maps.Marker({
       position: pos,
       animation: google.maps.Animation.DROP,
