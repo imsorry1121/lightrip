@@ -3,6 +3,7 @@ function addSchedule(){
 	var find = 0;
 	//console.log($('li.block.spotinfo').size());
 	//console.log($('#infoWindow ul li a').html());
+	//先看有沒有在schedule裡
 	while ((counter < $('li.block.spotinfo').size())&&(find==0)){
 		//console.log($('li.block.spotinfo').size(),"inner");
 		//console.log(counter);

@@ -27,18 +27,23 @@ google.setOnLoadCallback(function() {
 		//$( "#main" ).tabs();
 		$( "#droppable" ).droppable({
 			drop: function( event, ui ) {
+				console.log("drop");
 				$( '.ui-sortable-helper' ).remove();
 				$( '.ui-sortable-placeholder' ).remove();
+				//刪除頭尾交通
 				if ( $('ul#mySchedule li:last').attr('class') == "trans ui-state-disabled" ) {
-				$('ul#mySchedule li:last').remove();
+					console.log($('ul#mySchedule li:last'));
+					$('ul#mySchedule li:last').remove();
 				};
 				
 				if ( $('ul#mySchedule li:first').attr('class') == "trans ui-state-disabled" ) {
+					console.log($('ul#mySchedule li:first'));
 					$('ul#mySchedule li:first').remove();
 				};
 				$( "#droppable" ).hide();
-				}
+			}
 		});
+
 		$( "#mapFrame, #mySchedule" ).sortable({ 
 			connectWith: ".connectedSortable",
 			cancel: ".ui-state-disabled",
@@ -47,46 +52,31 @@ google.setOnLoadCallback(function() {
 			},
 			start: function(event, ui) {
 				$('#infoWindow').parent().attr('style');
-			//alert("activate!!")
-			console.log("ui-item=============:",ui.item);
-			//console.log(ui.placeholder);
-			//console.log(ui.placeholder.prev());
-			// console.log(ui.placeholder.next());
-			//return;
-				//if(temp_counter == 0){
-					//console.log("aaaaaaaaaaaaaaaaaaaaaa");
-					//console.log("next html:" + ui.placeholder.next().attr('address'));
-					
-					// if (ui.placeholder.prev().attr('class') == "trans ui-state-disabled" ) {
-						// ui.placeholder.prev().remove();
-					// };
-
-					// if (ui.placeholder.next().attr('class') == "trans ui-state-disabled" ) {
-						// ui.placeholder.next().remove();
-					// };
-						
-					ui.placeholder.prevAll('.ui-state-disabled').first().remove();
-					ui.placeholder.nextAll('.ui-state-disabled').first().remove();
-
-					//console.log($('ul#mySchedule li:first').attr('address'));
-					//console.log(ui.placeholder.attr('address'));	
-
+				//ui.sortable.placrholder是放在schedule透明的那個
+				//ui.sortalbe.helper是拿起來那一個
+				// 把前後一個交通清除
+					// console.log("the prev first: "+ui.placeholder.prevAll('.ui-state-disabled').first());
+					console.log(ui.placeholder.attr("style"));
+					if(ui.placeholder.prevAll('.ui-state-disabled').first()!= null)
+						{ui.placeholder.prevAll('.ui-state-disabled').first().remove();}
+					if(ui.placeholder.nextAll('.ui-state-disabled').first()!=null)
+					{ui.placeholder.nextAll('.ui-state-disabled').first().remove();}
 					if($('ul#mySchedule li:first').attr('address') == ui.placeholder.attr('address'))
 					{
 					//	console.log("click the first one");
-					}
-					else if ($('ul#mySchedule li:last').attr('address') == ui.placeholder.attr('address'))
-					{
+				}
+				else if ($('ul#mySchedule li:last').attr('address') == ui.placeholder.attr('address'))
+				{
 					//	console.log("click the last one");
 
-					}
-					else
-					{
-						var originC = ui.placeholder.prev().attr('address');
+				}
+				else
+				{
+					var originC = ui.placeholder.prev().attr('address');
 					//	console.log("originC(middle) = ");
 					//	console.log(originC);
 
-						var destinationC = ui.placeholder.next().attr('address');
+					var destinationC = ui.placeholder.next().attr('address');
 						//console.log(ui.placeholder.next());
 					//	console.log("destinationC(middle) = ");
 						// console.log(destinationC);
@@ -109,9 +99,9 @@ google.setOnLoadCallback(function() {
 
 
 					//$('<li class="trans ui-state-disabled">middle</li>').insertAfter(ui.item);
-					}
+				}
 				//};
-			temp_counter = 1;
+				temp_counter = 1;
 
 			},
 			/*change: function(event, ui) {
@@ -172,9 +162,9 @@ google.setOnLoadCallback(function() {
 				};
 			temp_counter = 1;
 
-			},*/
+		},*/
 
-			stop: function(event, ui) {
+		stop: function(event, ui) {
 			$('#droppable').hide();
 			//alert("stop!!");
 			console.log("ui-item=============:",ui.item);
@@ -303,9 +293,9 @@ google.setOnLoadCallback(function() {
 				$('ul#mySchedule li:first').remove();
 			};
 
-			}
-		}).disableSelection();
-		
+		}
+	}).disableSelection();
+
 		/*$(".block").resizable({
 			maxHeight: 300,
 			maxWidth: 150,
@@ -320,10 +310,10 @@ google.setOnLoadCallback(function() {
 			$("#buttonFrame").show();
 			$(".firstpage").hide();
 		});*/
-		$("#map").hide();
-		$("#b2").click(function() {
-			$(".menu").hide();
-			
+$("#map").hide();
+$("#b2").click(function() {
+	$(".menu").hide();
+
 			//$(".firstpage").show();
 			$("#scheduleFrame").show();
 			$("#map").hide();
@@ -332,12 +322,12 @@ google.setOnLoadCallback(function() {
 			$("#buttonFrame").show();
 			//嵌入body裡面會不會比較好
 		});
-		$("#b3").click(function() {
-			$(".menu").hide();
-			$(".firstpage").show();
-			$("#menu").show();
-			$("#buttonFrame").hide();
-			
+$("#b3").click(function() {
+	$(".menu").hide();
+	$(".firstpage").show();
+	$("#menu").show();
+	$("#buttonFrame").hide();
+
 			//嵌入body裡面會不會比較好
 		});
 
@@ -359,26 +349,24 @@ function lightbox(content) {
 		$(".bg").remove();//嵌入body裡面會不會比較好
 		
 	});
-	//if ($(".lightbox").attr("style:display") == "none"){
-			//$(".lightbox").remove();}
 }
 
-	$(function() {
-		$( "#eq > span" ).each(function() {
-			// read initial values from markup and remove that
-			var value = parseInt( $( this ).text(), 10 );
-			$( this ).empty().slider({
-				value: value,
-				range: "min",
-				animate: true,
-				orientation: "vertical",
-				stop: function(event, ui) {
-					$(this).attr('val',ui.value);
+$(function() {
+	$( "#eq > span" ).each(function() {
+	// read initial values from markup and remove that
+	var value = parseInt( $( this ).text(), 10 );
+	$( this ).empty().slider({
+		value: value,
+		range: "min",
+		animate: true,
+		orientation: "vertical",
+		stop: function(event, ui) {
+			$(this).attr('val',ui.value);
 
-				}
-			});
-		});
+		}
 	});
+});
+});
 
 (function($){
 	$(document).ready(function(){
@@ -406,16 +394,16 @@ function lightbox(content) {
 				$("#buttonFrame").show();
 				
 
-			$.ajax({
-				type: 'GET',
-				data: { 
-				 attr1: $( "#amount1" ).attr('val'),
-				 attr2: $( "#amount2" ).attr('val'),	
-				 attr3: $( "#amount3" ).attr('val'),	
-				 attr4: $( "#amount4" ).attr('val'),	
-				 attr5: $( "#amount5" ).attr('val'),	
-				 city: city_value
-				},
+				$.ajax({
+					type: 'GET',
+					data: { 
+						attr1: $( "#amount1" ).attr('val'),
+						attr2: $( "#amount2" ).attr('val'),	
+						attr3: $( "#amount3" ).attr('val'),	
+						attr4: $( "#amount4" ).attr('val'),	
+						attr5: $( "#amount5" ).attr('val'),	
+						city: city_value
+					},
 				//$( "#amount" ).html(),
 				url: "/step3",
 				//url: "http://lightrip-cytms.herokuapp.com/step3",
@@ -430,14 +418,18 @@ function lightbox(content) {
 					//$("li.block:even").append()
 					//$('li.block:odd').append("<a href=javascript:lightbox('hahaha')>"+data['test']+"</a>");
 					for ( var i = 0; i < data.length ; i++) {
-						if( data[i]['attr1'] != 1)
+						if( data[i]['attr1'] != 1)//做屬性的判斷
 						{
 							continue;
 						}
-						$('ul#mySchedule').append('<li class="block spotinfo" spotid="' + data[i]['id'] + '" name="' + data[i]['name'] + '" zoom="' + data[i]['zoom'] + '" lat="' + data[i]['lat'] + '" lon="' + data[i]['lon'] + '" address="' + data[i]['address'] + '" spotin="' + data[i]['attr1'] + '" info="' + data[i]['info']+ '" ><a href=javascript:lightbox("' + data[i]['name'] + '")>' + data[i]['name'] + '</a><br/></li>');
-						if( i != (data.length - 1)){
-							var origin1 = new google.maps.LatLng(data[i]['lat'], data[i]['lon']);
-							var destinationA = new google.maps.LatLng(data[i+1]['lat'], data[i+1]['lon']);
+						var nowSpot = data[i]; //把資料放進schedule
+						var nowAddress = new google.maps.LatLng(nowSpot['lat'], nowSpot['lon']);
+						// $('ul#mySchedule').append('<li class="block spotinfo" spotid="' + data[i]['id'] + '" name="' + data[i]['name'] + '" zoom="' + data[i]['zoom'] + '" lat="' + data[i]['lat'] + '" lon="' + data[i]['lon'] + '" address="' + data[i]['address'] + '" spotin="' + data[i]['attr1'] + '" info="' + data[i]['info']+ '" ><a href=javascript:lightbox("' + data[i]['name'] + '")>' + data[i]['name'] + '</a><br/></li>');
+						$('#mySchedule').append('<li class="block spotinfo" spotid="'+nowSpot['id']+'" name="'+nowSpot['name']+'" zoom="1.0" lat="'+nowSpot["lat"]+'" lon="'+nowSpot['lon']+'" address="'+nowAddress+'"spotin = "1" info="'+nowSpot['info']+'"><a href="javascript:lightbox(\''+nowSpot['name']+'\')">'+nowSpot['name']+'</a><img src="img/'+nowSpot['id']+'"height="60%" width="90%"><div class="travel_time_space"><div class="travel_time_content">'+nowSpot['MinTime']+'~'+nowSpot['MaxTime']+'hr</div></div></li>')
+						if( i != (data.length - 1)){//如果有下一個景點就算交通
+							var nextSpot = data[i+1];
+							var origin1 = nowAddress;
+							var destinationA = new google.maps.LatLng(nextSpot['lat'], nextSpot['lon']);
 							console.log(origin1);
 							console.log(destinationA);
 							// var origin1 = data[i]['address'];
@@ -447,19 +439,22 @@ function lightbox(content) {
 							traffic_id += "_";
 							traffic_id += destinationA;
 							return_value = 0;
-								//$('ul#mySchedule').append('<li class="trans ui-state-disabled" id="trans_' + data[i]['id'] + '"><div id="outputDiv_'+origin1+'_'+destinationA+'">default</div></li>');
-								$('ul#mySchedule').append('<li class="trans ui-state-disabled" id="' + traffic_id + '"></li>');
-							calculateDistances_walking(origin1,destinationA,traffic_id);
+							// if($('#mySchedule > li').last() != null){
+								// $('<li class="trans ui-state-disabled" id="' + traffic_id+ '"></li>').insertBefore($('#mySchedule > li').last());
+							// }
+							$('#mySchedule').append('<li class="trans ui-state-disabled" id="' +traffic_id + '"></li>');
+								// $('ul#mySchedule').append('<li class="trans ui-state-disabled" id="' + traffic_id + '"></li>');
+								calculateDistances_walking(origin1,destinationA,traffic_id);
 							//console.log("traffic_id: " + traffic_id);
 
 						}
-						$('li[spotid = "' + data[i]['id'] + '"]' ).append('<img src="/img/' + data[i]['id'] + '" height="60%" width="90%"><div class="travel_time_space"><div class="travel_time_content">'+data[i]['MinTime']+'~'+data[i]['MaxTime']+'hr</div></div>');
+						// $('li[spotid = "' + data[i]['id'] + '"]' ).append('<img src="/img/' + data[i]['id'] + '" height="60%" width="90%"><div class="travel_time_space"><div class="travel_time_content">'+data[i]['MinTime']+'~'+data[i]['MaxTime']+'hr</div></div>');
 					}
 
 				}
 			});
 
-			}
-		});
-	});
+}
+});
+});
 })(jQuery);
