@@ -56,10 +56,13 @@ google.setOnLoadCallback(function() {
 				//ui.sortalbe.helper是拿起來那一個
 				// 把前後一個交通清除
 					// console.log("the prev first: "+ui.placeholder.prevAll('.ui-state-disabled').first());
-					console.log(ui.placeholder.attr("style"));
-					if(ui.placeholder.prevAll('.ui-state-disabled').first()!= null)
+					console.log(ui.placeholder.attr("style"));//display:hidden
+					//first這邊有問題 ui placeholder attr address沒有這種東西
+					// console.log("the ui state before placeholder"+ ui.placeholder.prevAll('.ui-state-disabled').first().attr("id"));
+					// console.log("the ui state next placeholder"+ ui.placeholder.nextAll('.ui-state-disabled').first().attr("id"));
+					if(ui.placeholder.prevAll('.ui-state-disabled').first()!= undefined)
 						{ui.placeholder.prevAll('.ui-state-disabled').first().remove();}
-					if(ui.placeholder.nextAll('.ui-state-disabled').first()!=null)
+					if(ui.placeholder.nextAll('.ui-state-disabled').first()!= undefined)
 					{ui.placeholder.nextAll('.ui-state-disabled').first().remove();}
 					if($('ul#mySchedule li:first').attr('address') == ui.placeholder.attr('address'))
 					{
@@ -70,7 +73,7 @@ google.setOnLoadCallback(function() {
 					//	console.log("click the last one");
 
 				}
-				else
+				else//這邊會算移開跟下一個的
 				{
 					var originC = ui.placeholder.prev().attr('address');
 					//	console.log("originC(middle) = ");
@@ -79,7 +82,7 @@ google.setOnLoadCallback(function() {
 					var destinationC = ui.placeholder.next().attr('address');
 						//console.log(ui.placeholder.next());
 					//	console.log("destinationC(middle) = ");
-						// console.log(destinationC);
+						 // console.log(destinationC);
 
 
 						//var origin1 = data[i]['address'];
@@ -167,7 +170,7 @@ google.setOnLoadCallback(function() {
 		stop: function(event, ui) {
 			$('#droppable').hide();
 			//alert("stop!!");
-			console.log("ui-item=============:",ui.item);
+			// console.log("ui-item=============:",ui.item);
 			temp_counter = 0;	
 			//alert('class:' + ui.item.prev().attr('class'));
 			if (ui.item.prev().attr('class') == "trans ui-state-disabled" ) {
