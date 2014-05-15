@@ -1,4 +1,5 @@
 Lightrip - Managing your trip by easy drag-and-drop move 
+(Please view the website on Firefox or Safari, it has some errors viewing on Chrome)
 
 Coordinators: Ken Chen, Pin-Yen Lee, Cytms
 Skills:       ROR, FB API, and Google Maps API
