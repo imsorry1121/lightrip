@@ -66,7 +66,7 @@
           var origins = response.originAddresses;
           var destinations = response.destinationAddresses;
           //var testDiv = "outputDiv_"+origins[0]+"_"+destinations[0]+"";
-          
+          console.log("id is"+ id);
           var outputDiv = document.getElementById(id);
           outputDiv.innerHTML = '';
          

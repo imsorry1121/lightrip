@@ -1,130 +1,156 @@
-/*想要換成change就會及時跑出來*/
+/*整理過後*/
 google.load("jquery", "1.7");
 google.load("jqueryui", "1.8");
+
 google.setOnLoadCallback(function() {
 	$('#main').css('-moz-user-select', 'none'); //禁止fx選取文字
 	$('#main').get(0).onselectstart = function(){return false;}; //禁止IE選取文字
 	
 	var temp_counter = 0;
+	var spotId=0;
 	// 所有行程
 	$(function() {
 		//$( "#main" ).tabs();
-
-		//placeholder 會出現在
 		$( "#droppable" ).droppable({
 			drop: function( event, ui ) {
+				console.log("drop");
+				// ui.helper.remove();
+				$( '.ui-sortable-helper' ).remove();
+				console.log("drop over");
 				$( "#droppable" ).hide();
-				// if(ui.placeholder.prev().attr('class')=="")
-				// $( '.ui-sortable-helper' ).remove();
-				$( '.ui-sortable-placeholder' ).remove();
 			}
 		});
 
-
-		$( "#mapFrame, #mySchedule" ).sortable({  //mapframe need to be sortable?	
-			cancel: ".ui-state-disabled", //cancel 後call就會跳過
-			sort: function(event, ui){
-				
-			},
+		$( "#mySchedule" ).sortable({ 
+			cancel: ".ui-state-disabled",
 			start: function(event, ui) {
 				$('#droppable').show();
-				var pos = ui.placeholder.index();
-				console.log("the pos before change is :"+ pos);
-				ui.placeholder.data('pos', pos);
+				spotId = ui.helper.attr("spotid");
+					ui.helper.prev(".ui-state-disabled").remove();//沒有也沒關係
+					ui.placeholder.next(".ui-state-disabled").remove();
+					var originC = ui.helper.prev().attr('address');
+					var destinationC = ui.placeholder.next().attr('address');
 
-				//如果是最上或是最下面
+					if(originC!=undefined&&destinationC!=undefined){
+						var traffic_id = "";
+						traffic_id = "traffic_" + originC;
+						traffic_id += "_";
+						traffic_id += destinationC;
+						$('<li class="trans ui-state-disabled" id="' + traffic_id + '"></li>').insertAfter(ui.placeholder);
+						calculateDistances_walking(originC,destinationC,traffic_id);
+					}			
+				}, 
+
+				stop: function(event, ui) {
+					console.log("stop");
+					$('#droppable').hide();
+					console.log(ui.placeholder.attr("style"));
+
+					console.log($("#mySchedule [spotid='"+spotId+"']").length);
+					if($("#mySchedule [spotid='"+spotId+"']").length>0){//O表示drop掉了，否則要增加交通
+						ui.item.prev(".ui-state-disabled").remove();
+						ui.item.next(".ui-state-disabled").remove();
+
+						if($('ul#mySchedule li:first').attr('address') == ui.item.attr('address'))
+						{
+							console.log("stop at the first one");
+
+							var origin_after = ui.item.attr("address");
+							console.log("origin_after = ");
+							console.log(origin_after);
+
+							var destination_after = ui.item.next().attr('address');
+							console.log("destination_after = ");
+							console.log(destination_after);
+
+							var traffic_id_after = "";
+							traffic_id_after = "traffic_" + origin_after;
+							traffic_id_after += "_";
+							traffic_id_after += destination_after;
+
+							$('<li class="trans ui-state-disabled" id="' + traffic_id_after + '"></li>').insertAfter(ui.item);
+							calculateDistances_walking(origin_after,destination_after,traffic_id_after);
+						}
+						else if ($('ul#mySchedule li:last').attr('address') == ui.item.attr('address'))
+						{
+							console.log("stop at the last one");
+
+							var origin_before = ui.item.prev().attr('address');
+							console.log("origin_before = ");
+							console.log(origin_before);
+
+							var destination_before = ui.item.attr("address");
+							console.log("destination_before = ");
+							console.log(destination_before);
+
+							var traffic_id_before = "";
+							traffic_id_before = "traffic_" + origin_before;
+							traffic_id_before += "_";
+							traffic_id_before += destination_before;
+							$('<li class="trans ui-state-disabled" id="' + traffic_id_before + '"></li>').insertBefore(ui.item);
+							calculateDistances_walking(origin_before,destination_before,traffic_id_before);
+
+						}
+						else
+						{
+							console.log("stop at the middle");
+							var origin_before = ui.item.prevAll(".spotinfo").first().attr('address');
+							console.log("origin_before = ");
+							console.log(origin_before);
+
+							var destination_before = ui.item.attr("address");
+
+							console.log("destination_before = ");
+							console.log(destination_before);
 
 
-			},
-			change: function(event, ui) {
-				//全部用位置最快，可是因為有helper很奇怪
-//網上change要刪下面的
-var prePos = ui.placeholder.data('pos');
-var nowPos = ui.placeholder.index();
-console.log("the pos after change is:" +nowPos);
-//如果是本來最上最下 原本不用算，直接刪掉
-//如果本來不是，則要拿出下一個下三個或下兩個出來
-ui.placeholder.next(".trans").remove();
-ui.placeholder.prev(".trans").remove();
-if(prePos>nowPos){
-	console.log("move up");
-	ui.placeholder.nextAll(".trans").first().remove();
-	ui.placeholder.nextAll(".trans").first().remove();
+							var origin_after = ui.item.attr("address");
+							console.log("origin_after = ");
+							console.log(origin_after);
 
-	var bhelperAddress = ui.placeholder.next().attr("address");
-	var afterAddress = ui.placeholder.next().next.attr("address");
+							var destination_after = ui.item.nextAll(".spotinfo").first().attr('address');
 
-	if(bhelperAddress!= undefined && ahelperAddress!=undefined){
-		var traffic_id = "";
-		traffic_id = "traffic_" + bhelperAddress;
-		traffic_id += "_";
-		traffic_id += ahelperAddress;
-		$('<li class="trans ui-state-disabled" id="' + traffic_id + '"></li>').insertAfter(ui.helper);
-		calculateDistances_walking(bhelperAddress, ahelperAddress, traffic_id);
-	}
-}
-if(prePos<nowPos){
-	console.log("move down");
-	ui.placeholder.prev().next(".trans").remove();
-	ui.placeholder.next().next(".trans").remove();
-
-}
-
-nowPos = ui.placeholder.index();
-ui.placeholder.data('pos', nowPos);
+							console.log("destination_after = ");
+							console.log(destination_after);
 
 
-/*ui.helper.prev('.trans').remove();
-ui.helper.next('.trans').remove();
-var bhelperAddress = ui.helper.prev().attr("address");
-var ahelperAddress = ui.helper.next().attr("address");
-				if(bhelperAddress!= undefined && ahelperAddress!=undefined){//如果沒有表示為第一第二
-					var traffic_id = "";
-					traffic_id = "traffic_" + bhelperAddress;
-					traffic_id += "_";
-					traffic_id += ahelperAddress;
-					$('<li class="trans ui-state-disabled" id="' + traffic_id + '"></li>').insertAfter(ui.helper);
-					calculateDistances_walking(bhelperAddress, ahelperAddress, traffic_id);
+							var traffic_id_before = "";
+							traffic_id_before = "traffic_" + origin_before;
+							traffic_id_before += "_";
+							traffic_id_before += destination_before;
+
+							var traffic_id_after = "";
+							traffic_id_after = "traffic_" + origin_after;
+							traffic_id_after += "_";
+							traffic_id_after += destination_after;
+
+							$('<li class="trans ui-state-disabled" id="' + traffic_id_before + '"></li>').insertBefore(ui.item);
+							calculateDistances_walking(origin_before,destination_before,traffic_id_before);
+							$('<li class="trans ui-state-disabled" id="' + traffic_id_after + '"></li>').insertAfter(ui.item);
+							calculateDistances_walking(origin_after,destination_after,traffic_id_after);
+
+						}	
+					}
 				}
+			}).disableSelection();
 
 
-				ui.placeholder.prev('.trans').remove();
-				ui.placeholder.next('.trans').remove();
-				// var beforeAddress = ui.placeholder.prevAll('[address]').first().attr("address");
-				// var afterAddress = ui.placeholder.nextAll('[address]').first().attr("address");
-				var beforeAddress = ui.placeholder.prev().attr("address");
-				var dragAddress = ui.helper.attr('address');
-
-				var afterAddress = ui.placeholder.next().attr("address");
-				console.log("Address: from"+beforeAddress+" to " +dragAddress+" to "+afterAddress);
 
 
-				if (beforeAddress!=undefined){
-					var traffic_id_before = "";
-					traffic_id_before = "traffic_" + beforeAddress;
-					traffic_id_before += "_";
-					traffic_id_before += dragAddress;
-					$('<li class="trans ui-state-disabled" id="' + traffic_id_before + '"></li>').insertBefore(ui.placeholder);
-					calculateDistances_walking(beforeAddress, dragAddress, traffic_id_before);
-				}
+		/*$(".block").resizable({
+			maxHeight: 300,
+			maxWidth: 150,
+			minHeight: 40,
+			minWidth: 150,
+		});*/
 
-				if (afterAddress!=undefined){
-					var traffic_id_before2 = "";
-					traffic_id_before2 = "traffic_" + dragAddress;
-					traffic_id_before2 += "_";
-					traffic_id_before2 += afterAddress;
-					$('<li class="trans ui-state-disabled" id="' + traffic_id_before2 + '"></li>').insertAfter(ui.placeholder);
-					calculateDistances_walking(beforeAddress, dragAddress, traffic_id_before2);
-				}*/
-
-			},
-			
-			stop: function(event, ui) {
-				$('#droppable').hide();
-
-			}
-		}).disableSelection();
-
+		/*$(".active").click(function() {
+			//$("form").submit();
+			$(".menu").hide();//嵌入body裡面會不會比較好
+			$("#scheduleFrame").show();
+			$("#buttonFrame").show();
+			$(".firstpage").hide();
+		});*/
 $("#map").hide();
 $("#b2").click(function() {
 	$(".menu").hide();
@@ -183,9 +209,8 @@ $(function() {
 });
 });
 
-(function($){
-	$(document).ready(function(){
-		$('.active').click(function(){
+$(document).ready(function(){
+	$('.active').click(function(){
 			clearschedule();   // 清空schedule
 			
 			
@@ -272,4 +297,3 @@ $(function() {
 }
 });
 });
-})(jQuery);

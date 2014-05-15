@@ -1,19 +1,4 @@
-
-/**import_map.js**/
-/*$(function(){ 
-  $('#myMap').tinyMap({ 
-      center: {x: '25.03369510279853', y: '121.56480431556702'}, 
-      zoom: 16 
-  }); 
-
-  $('#myMap').tinyMap({ 
-      marker: [ 
-          {addr: '25.037467, 121.564077', text: '台北市政府'}, 
-          {addr: '25.100295, 121.549494', text: '國立故宮博物院'} 
-      ] 
-  }); 
-});*/
-
+/*original version*/
 google.load("jquery", "1.7");
 google.load("jqueryui", "1.8");
 
@@ -48,9 +33,10 @@ google.setOnLoadCallback(function() {
 			connectWith: ".connectedSortable",
 			cancel: ".ui-state-disabled",
 			sort: function(event, ui) {
-				$('#droppable').show();
+				
 			},
 			start: function(event, ui) {
+				$('#droppable').show();
 				$('#infoWindow').parent().attr('style');
 				//ui.sortable.placrholder是放在schedule透明的那個
 				//ui.sortalbe.helper是拿起來那一個
